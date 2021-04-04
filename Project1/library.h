@@ -1,5 +1,5 @@
 #pragma once
-#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
@@ -7,14 +7,14 @@
 #include <string.h>
 #include <string>
 #include <winsock.h>
-#include <mysql.h>
+
 #include <cstdlib>
 #include <time.h>
 #include <ctime>
 #include <sstream>
 #include <cstring>
+#include "DB.h"
 
-#pragma comment(lib, "libmysql.lib")
 
 using namespace std;
 #define UP 0
@@ -27,10 +27,6 @@ void cursor(int n);
 int keyControl();
 void connectDB();
 
-MYSQL mysql;
-MYSQL_RES* res;
-MYSQL_ROW row;
-MYSQL* Connection = NULL, conn;
 int query_state;
 int fields;
 
@@ -65,16 +61,7 @@ int keyControl() {
 	}
 }
 
-void connectDB() {
-	mysql_init(&mysql); //mysql √ ±‚»≠
-	Connection = mysql_real_connect(&mysql, "localhost", "root", "mirim2", "library", 3306, NULL, 0);
-	if (Connection == NULL) {
-		cout << mysql_error(&mysql) << endl;
-	}
-	mysql_query(Connection, "set session character_set_connection=euckr;");
-	mysql_query(Connection, "set session character_set_results=euckr;");
-	mysql_query(Connection, "set session character_set_client=euckr;");
-}
+
 
 class Time {
 	int year=0;
